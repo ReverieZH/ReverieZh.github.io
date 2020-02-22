@@ -8,13 +8,50 @@
   <link rel="dns-prefetch" href="https://ReverieZh.github.io">
   <title>ReverieZH</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="RedisRedis（全称：Remote Dictionary Server 远程字典服务）是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库。是一款NOSQL系列的非关系型数据库 对于key-value的非关系数据库是比较适合做缓存的。那么Redis有什么用。比如当数据库中的某些数据是不经常改变的，这时就可以将这些数据存入到缓存中。当客户端读取">
+<meta property="og:type" content="article">
 <meta property="og:title" content="ReverieZH">
-<meta property="og:url" content="https://ReverieZh.github.io/index.html">
+<meta property="og:url" content="https://ReverieZh.github.io/2020/02/22/Redis基础学习/index.html">
 <meta property="og:site_name" content="ReverieZH">
+<meta property="og:description" content="RedisRedis（全称：Remote Dictionary Server 远程字典服务）是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库。是一款NOSQL系列的非关系型数据库 对于key-value的非关系数据库是比较适合做缓存的。那么Redis有什么用。比如当数据库中的某些数据是不经常改变的，这时就可以将这些数据存入到缓存中。当客户端读取">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222101437141.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222102210570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAzNTAxNw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222102244289.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAzNTAxNw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222102510403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAzNTAxNw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222102643376.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAzNTAxNw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222103052537.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAzNTAxNw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222103338577.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222104003105.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222104253390.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222104330728.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020022210454382.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222104959528.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222105240491.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222105849578.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222110020547.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222110133831.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222110627566.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222110958972.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAzNTAxNw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222111240398.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222112025740.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222112155887.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAzNTAxNw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222112222422.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222112603142.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222112805957.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020022211284899.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020022211323828.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222113336836.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAzNTAxNw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222113440105.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAzNTAxNw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222114029532.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222115218176.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222115337232.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200222115349568.png">
+<meta property="og:updated_time" content="2020-02-22T10:29:20.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ReverieZH">
+<meta name="twitter:description" content="RedisRedis（全称：Remote Dictionary Server 远程字典服务）是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库。是一款NOSQL系列的非关系型数据库 对于key-value的非关系数据库是比较适合做缓存的。那么Redis有什么用。比如当数据库中的某些数据是不经常改变的，这时就可以将这些数据存入到缓存中。当客户端读取">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200222101437141.png">
   
     <link rel="alternative" href="/atom.xml" title="ReverieZH" type="application/atom+xml">
   
@@ -156,9 +193,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Redis基础学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Redis基础学习" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
@@ -332,16 +367,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/22/Redis基础学习/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ReverieZh.github.io/2020/02/22/Redis基础学习/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/22/SpringMvc基础学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -356,199 +450,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SpringMvc基础学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-     <p>SpringMVC</p>
-<h1 id="MVC模式"><a href="#MVC模式" class="headerlink" title="MVC模式"></a>MVC模式</h1><p>MVC是Model,View和Controller的缩写<br>模型：用于存储数据以及处理用户请求的业务逻辑<br>视图：向控制器提交数据，显示模型中的数据<br>控制器：根据视图提出的请求判断请求和数据交给哪个模型处理，将处理后的有关结果交给哪个视图更新显示</p>
-  
-
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaEE//" class="article-tag-list-link color2">JavaEE</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaEE/SpringMVC//" class="article-tag-list-link color5">SpringMVC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/22/SpringMvc基础学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis"><span class="toc-number">1.</span> <span class="toc-text">Redis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#环境搭建"><span class="toc-number">2.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#命令操作"><span class="toc-number">3.</span> <span class="toc-text">命令操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-通用命令"><span class="toc-number">3.0.1.</span> <span class="toc-text">1.通用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-字符串类型"><span class="toc-number">3.0.2.</span> <span class="toc-text">2.字符串类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hashmap类型"><span class="toc-number">3.0.3.</span> <span class="toc-text">hashmap类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#list类型"><span class="toc-number">3.0.4.</span> <span class="toc-text">list类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set集合"><span class="toc-number">3.0.5.</span> <span class="toc-text">set集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sortedset类型"><span class="toc-number">3.0.6.</span> <span class="toc-text">sortedset类型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#持久化"><span class="toc-number">4.</span> <span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-RDB方式"><span class="toc-number">4.0.1.</span> <span class="toc-text">1.RDB方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-AOF方式"><span class="toc-number">4.0.2.</span> <span class="toc-text">2.AOF方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#java使用redis"><span class="toc-number">5.</span> <span class="toc-text">java使用redis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#操作数据"><span class="toc-number">5.0.1.</span> <span class="toc-text">操作数据</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-操作字符串"><span class="toc-number">5.0.1.0.0.1.</span> <span class="toc-text">1).操作字符串</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-操作hashmap"><span class="toc-number">5.0.1.0.0.2.</span> <span class="toc-text">2).操作hashmap</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-操作list"><span class="toc-number">5.0.1.0.0.3.</span> <span class="toc-text">3)操作list</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-操作set"><span class="toc-number">5.0.1.0.0.4.</span> <span class="toc-text">4)操作set</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#5-操作sortedset"><span class="toc-number">5.0.1.0.0.5.</span> <span class="toc-text">5).操作sortedset</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JedisPool"><span class="toc-number">6.</span> <span class="toc-text">JedisPool</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-Spring基础学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-     <h1 id="Spring简介"><a href="#Spring简介" class="headerlink" title="Spring简介"></a>Spring简介</h1><p>Spring是分层的JavaSE/EE full-stack 轻量级开源框架，以IoC（Inverse of Control 控制反转）和AOP（Aspect Oriented Programming 面向切面编程）为内核，使用基本的JavaBean来实现程序功能。<br>在实际开发中，通常服务器端采用三层体系架构，分别为表示层(web)、业务逻辑层(service)、持久层(dao)， Spring对每一层都提供了技术支持。</p>
   
-
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaEE//" class="article-tag-list-link color2">JavaEE</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/JavaEE/Spring//" class="article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/20/Spring基础学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-  
-    <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Reverie-Hello"><a href="#Reverie-Hello" class="headerlink" title="Reverie Hello"></a>Reverie Hello</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
   
 
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/04/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
+
   
 
 
@@ -571,8 +498,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
