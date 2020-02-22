@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="https://ReverieZh.github.io">
   <title>ReverieZH</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="RedisRedis（全称：Remote Dictionary Server 远程字典服务）是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库。是一款NOSQL系列的非关系型数据库 对于key-value的非关系数据库是比较适合做缓存的。那么Redis有什么用。比如当数据库中的某些数据是不经常改变的，这时就可以将这些数据存入到缓存中。当客户端读取">
+  <meta name="description" content="RedisRedis（全称：Remote Dictionary Server 远程字典服务）是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库。是一款NOSQL系列的非关系型数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ReverieZH">
 <meta property="og:url" content="https://ReverieZh.github.io/2020/02/22/Redis基础学习/index.html">
 <meta property="og:site_name" content="ReverieZH">
-<meta property="og:description" content="RedisRedis（全称：Remote Dictionary Server 远程字典服务）是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库。是一款NOSQL系列的非关系型数据库 对于key-value的非关系数据库是比较适合做缓存的。那么Redis有什么用。比如当数据库中的某些数据是不经常改变的，这时就可以将这些数据存入到缓存中。当客户端读取">
+<meta property="og:description" content="RedisRedis（全称：Remote Dictionary Server 远程字典服务）是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库。是一款NOSQL系列的非关系型数据库">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200222101437141.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200222102210570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAzNTAxNw==,size_16,color_FFFFFF,t_70">
@@ -47,10 +47,10 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200222115218176.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200222115337232.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200222115349568.png">
-<meta property="og:updated_time" content="2020-02-22T10:29:20.035Z">
+<meta property="og:updated_time" content="2020-02-22T10:31:12.952Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ReverieZH">
-<meta name="twitter:description" content="RedisRedis（全称：Remote Dictionary Server 远程字典服务）是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库。是一款NOSQL系列的非关系型数据库 对于key-value的非关系数据库是比较适合做缓存的。那么Redis有什么用。比如当数据库中的某些数据是不经常改变的，这时就可以将这些数据存入到缓存中。当客户端读取">
+<meta name="twitter:description" content="RedisRedis（全称：Remote Dictionary Server 远程字典服务）是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库。是一款NOSQL系列的非关系型数据库">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200222101437141.png">
   
     <link rel="alternative" href="/atom.xml" title="ReverieZH" type="application/atom+xml">
@@ -201,6 +201,7 @@
 
   
     <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p>Redis（全称：Remote Dictionary Server 远程字典服务）是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库。是一款NOSQL系列的非关系型数据库</p>
+<a id="more"></a>
 <p>对于key-value的非关系数据库是比较适合做缓存的。那么Redis有什么用。比如当数据库中的某些数据是不经常改变的，这时就可以将这些数据存入到缓存中。当客户端读取数据时，可以直接从缓存中读取。从而减少了对数据库的访问。</p>
 <p>Redis做缓存的流程和计算机的缓存差不多。当第一次查询数据时，发现缓存中没有数据，便从数据库读取数据。当从数据库读取到数据之后，将数据存入到redis中。下次读取数据时，便从redis缓存中直接读取</p>
 <p>Redis是一个key-value型数据库，value所支持的类型有<br>1.string类型<br>2.hashmap类型<br>3.list类型<br>4.set类型<br>5.sortedset类型(有序集合)</p>
